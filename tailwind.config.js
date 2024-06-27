@@ -18,15 +18,15 @@ export default {
     themes: [
       {
         lightTheme: {
-          primary: "#151616",
-          secondary: "#fb7185",
-          accent: "#EDE9E6",
-          neutral: "#111309",
+          primary: "#FFDB00",
+          secondary: "#AF55E1",
+          accent: "#90B7E1",
+          neutral: "#42232d",
           "base-100": "#FAFDFD",
-          info: "#777777",
-          success: "#34d399",
-          warning: "#f59e0b",
-          error: "#dc2626",
+          info: "#66DDC1",
+          success: "#1AD326",
+          warning: "#D44040",
+          error: "#ff0046",
           body: {
             "background-color": "#ffffff",
           },
