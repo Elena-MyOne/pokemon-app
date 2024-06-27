@@ -1,18 +1,23 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import React from 'react';
+import Header from './components/Header';
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <div>
-        Hello
-      </div>
-    </>
-  );
+interface AppProps {
+  searchQuery: string;
 }
 
-export default App;
+export default class App extends React.Component<object, AppProps> {
+  constructor(props: AppProps) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <>
+        <Header value='' />
+        <main className="m-auto p-0 md:container">Hello</main>
+        <footer></footer>
+      </>
+    )
+  }
+}
+

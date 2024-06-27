@@ -1,8 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
-    "./src/**/ *.{ js, ts, jsx, tsx }",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -18,7 +17,7 @@ export default {
     themes: [
       {
         lightTheme: {
-          primary: "#FFDB00",
+          primary: "#EDC400",
           secondary: "#AF55E1",
           accent: "#90B7E1",
           neutral: "#42232d",
