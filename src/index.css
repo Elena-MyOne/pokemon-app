@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "integralcf";
+  src: url("../assets/fonts/integralcf-extrabold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+main {
+  flex: 1;
+}
