@@ -15,7 +15,6 @@ export default class App extends React.Component<object, AppProps> {
       <>
         <Header value='' />
         <main className="m-auto p-0 md:container">Hello</main>
-        <footer></footer>
       </>
     )
   }
