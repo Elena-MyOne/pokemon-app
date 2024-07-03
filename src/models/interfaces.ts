@@ -33,7 +33,7 @@ export interface PokemonData {
     name: string;
     url: string;
   };
-  spites: PokemonDataSpites;
+  sprites: PokemonDataSprites;
   stats: PokemonStatsData[];
   types: PokemonTypesData[];
   weight: number;
@@ -95,7 +95,7 @@ interface PokemonMovesData {
   }[]
 }
 
-interface PokemonDataSpites {
+interface PokemonDataSprites {
   back_default: string,
   back_female: null,
   back_shiny: string,

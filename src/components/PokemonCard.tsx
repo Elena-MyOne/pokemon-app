@@ -16,8 +16,15 @@ export default class PokemonCard extends React.Component<PokemonCardProps, { pok
   render() {
     const { pokemon } = this.state;
     return (
-      <div className="card">
-        <h2 className="">{pokemon.name}</h2>
+      <div className="card card-compact bg-base-100 w-56 hover:shadow-lg cursor-pointer duration-300 shadow-md">
+        <figure className="h-36">
+          <img
+            src={pokemon.sprites.front_default}
+            alt={`pokemon ${pokemon.name} image`} />
+        </figure>
+        <div className="card-body items-center">
+          <h2 className="card-title text-center">{pokemon.name}</h2>
+        </div>
       </div>
     )
   }
