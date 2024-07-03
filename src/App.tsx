@@ -86,14 +86,15 @@ export default class App extends React.Component<object, AppProps> {
     return (
       <>
         <Header value='' />
-        <main className="m-auto p-0 md:container">
-          <div className="grid grid-cols-3 grid-rows-2 gap-4 py-4">
-            {(isLoading) ? <p>Loaing ...</p> : (
-              pokemons.map(pokemon => (
-                <PokemonCard key={pokemon.id} pokemon={pokemon} />
-              ))
+        <main className="m-auto px-0 py-4 md:container">
+          {(isLoading) ?
+            (<div className='text-center'><span className="loading loading-spinner text-primary"></span></div>) : (
+              <div className="grid grid-cols-3 grid-rows-2 gap-4 py-4">
+                {pokemons.map(pokemon => (
+                  <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                ))}
+              </div>
             )}
-          </div>
         </main>
       </>
     )

@@ -8,6 +8,5 @@ if [ "$branch" = "main" ]; then
   exit 1
 fi
 
-# npm test
 npm run format:fix
 npm run lint
