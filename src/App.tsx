@@ -33,6 +33,12 @@ export default class App extends React.Component<object, AppProps> {
   }
 
   async componentDidMount(): Promise<void> {
+    const searchQuery = localStorage.getItem('PockemonCo');
+    if (searchQuery) {
+      this.handleSearch();
+      return
+    }
+
     this.getPokemons();
   }
 
