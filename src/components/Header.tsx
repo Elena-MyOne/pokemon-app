@@ -3,6 +3,7 @@ import { CiSearch } from "react-icons/ci";
 
 interface HeaderProps {
   value: string;
+  handleSearch(): Promise<void>
 }
 
 export default class Header extends React.Component<HeaderProps, { value: string }> {
@@ -24,18 +25,19 @@ export default class Header extends React.Component<HeaderProps, { value: string
 
   handleChange(event: React.FormEvent<HTMLInputElement>): void {
     const target = event.currentTarget.value;
-    this.setState({ value: target })
-    console.log(target)
+    this.setState({ value: target });
   }
 
   handleSearchButton(): void {
     const { value } = this.state;
-    localStorage.setItem('PockemonCo', value)
+    localStorage.setItem('PockemonCo', value);
   }
 
   handleSearchForm(event: React.FormEvent) {
     event.preventDefault();
+    const { handleSearch } = this.props;
     this.handleSearchButton();
+    handleSearch();
   }
 
   render() {
