@@ -147,9 +147,9 @@ export default class App extends React.Component<object, AppProps> {
 
   throwError() {
     this.setState({
-      isClichedErrorButton: true
-    })
-    console.error("Error: The Error boundary button was triggered")
+      isClichedErrorButton: true,
+    });
+    console.error('Error: The Error boundary button was triggered');
   }
 
   render() {
@@ -167,7 +167,9 @@ export default class App extends React.Component<object, AppProps> {
             ) : (
               <>
                 <div className="flex justify-end my-4">
-                  <button className='btn btn-primary' onClick={this.throwError}>ErrorBoundary</button>
+                  <button className="btn btn-primary" onClick={this.throwError}>
+                    ErrorBoundary
+                  </button>
                 </div>
                 {isLoading && (
                   <div className="text-center">
