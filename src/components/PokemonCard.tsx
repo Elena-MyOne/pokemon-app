@@ -1,16 +1,19 @@
-import React from "react";
-import { PokemonData } from "../models/interfaces";
+import React from 'react';
+import { PokemonData } from '../models/interfaces';
 
 interface PokemonCardProps {
   pokemon: PokemonData;
 }
 
-export default class PokemonCard extends React.Component<PokemonCardProps, { pokemon: PokemonData }> {
+export default class PokemonCard extends React.Component<
+  PokemonCardProps,
+  { pokemon: PokemonData }
+> {
   constructor(props: PokemonCardProps) {
     super(props);
-    this.state = ({
-      pokemon: props.pokemon
-    })
+    this.state = {
+      pokemon: props.pokemon,
+    };
   }
 
   render() {
@@ -20,9 +23,7 @@ export default class PokemonCard extends React.Component<PokemonCardProps, { pok
       <div className="card card-compact bg-base-100 w-56 hover:shadow-lg cursor-pointer duration-300 shadow-md">
         {pokemon.sprites.front_default ? (
           <figure className="h-36">
-            <img
-              src={pokemon.sprites.front_default}
-              alt={`pokemon ${pokemon.name} image`} />
+            <img src={pokemon.sprites.front_default} alt={`pokemon ${pokemon.name} image`} />
           </figure>
         ) : (
           <div className="w-full h-36 bg-secondary"></div>
@@ -35,6 +36,6 @@ export default class PokemonCard extends React.Component<PokemonCardProps, { pok
           <p>Base Experience: {pokemon.base_experience}</p>
         </div>
       </div>
-    )
+    );
   }
 }

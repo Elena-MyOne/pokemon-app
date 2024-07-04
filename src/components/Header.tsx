@@ -1,26 +1,26 @@
-import React from "react";
-import { CiSearch } from "react-icons/ci";
+import React from 'react';
+import { CiSearch } from 'react-icons/ci';
 
 interface HeaderProps {
   value: string;
-  handleSearch(): Promise<void>
+  handleSearch(): Promise<void>;
 }
 
 export default class Header extends React.Component<HeaderProps, { value: string }> {
   constructor(props: HeaderProps) {
     super(props);
     this.state = {
-      value: props.value || ''
-    }
+      value: props.value || '',
+    };
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSearchButton = this.handleSearchButton.bind(this)
-    this.handleSearchForm = this.handleSearchForm.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSearchButton = this.handleSearchButton.bind(this);
+    this.handleSearchForm = this.handleSearchForm.bind(this);
   }
 
   componentDidMount(): void {
     const savedValue = localStorage.getItem('PockemonCo') || '';
-    this.setState({ value: savedValue })
+    this.setState({ value: savedValue });
   }
 
   handleChange(event: React.FormEvent<HTMLInputElement>): void {
@@ -48,11 +48,22 @@ export default class Header extends React.Component<HeaderProps, { value: string
         <div className="font-bold text-primary text-xl">Pokémon</div>
         <form onSubmit={this.handleSearchForm}>
           <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Search..." value={value} onChange={this.handleChange} />
-            <button className="text-2xl text-gray-400 cursor-pointer hover:text-black duration-300" onClick={this.handleSearchButton}><CiSearch /></button>
+            <input
+              type="text"
+              className="grow"
+              placeholder="Search..."
+              value={value}
+              onChange={this.handleChange}
+            />
+            <button
+              className="text-2xl text-gray-400 cursor-pointer hover:text-black duration-300"
+              onClick={this.handleSearchButton}
+            >
+              <CiSearch />
+            </button>
           </label>
         </form>
       </header>
-    )
+    );
   }
 }

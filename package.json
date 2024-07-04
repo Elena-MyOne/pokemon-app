@@ -1,5 +1,6 @@
 {
-  "name": "vite-project",
+  "homepage": "https://elena-myone.github.io/pokemon-app",
+  "name": "pokemon-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",

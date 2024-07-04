@@ -1,13 +1,13 @@
 export interface PokemonsData {
-  count: number,
-  next: string | null,
-  previous: string | null,
-  results: PokemonsDataResults[]
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonsDataResults[];
 }
 
 export interface PokemonsDataResults {
-  name: string,
-  url: string
+  name: string;
+  url: string;
 }
 
 export interface PokemonData {
@@ -39,20 +39,18 @@ export interface PokemonData {
   weight: number;
 }
 
-
-
 interface PokemonAbilitiesData {
   ability: {
     name: string;
     url: string;
-  }
+  };
   is_hidden: boolean;
-  slot: number
+  slot: number;
 }
 
 interface PokemonFormsData {
   name: string;
-  url: string
+  url: string;
 }
 
 interface PokemonGameIndicesData {
@@ -60,7 +58,7 @@ interface PokemonGameIndicesData {
   version: {
     name: string;
     url: string;
-  }
+  };
 }
 
 interface PokemonHeldItemsData {
@@ -72,38 +70,38 @@ interface PokemonHeldItemsData {
     rarity: number;
     version: {
       name: string;
-      url: string
-    }
-  }[]
+      url: string;
+    };
+  }[];
 }
 
 interface PokemonMovesData {
   move: {
     name: string;
     url: string;
-  },
+  };
   version_group_details: {
     level_learned_at: number;
     move_learn_method: {
       name: string;
       url: string;
-    },
+    };
     version_group: {
       name: string;
       url: string;
-    }
-  }[]
+    };
+  }[];
 }
 
 interface PokemonDataSprites {
-  back_default: string,
-  back_female: null,
-  back_shiny: string,
-  back_shiny_female: null,
-  front_default: string,
-  front_female: null,
-  front_shiny: string,
-  front_shiny_female: null,
+  back_default: string;
+  back_female: null;
+  back_shiny: string;
+  back_shiny_female: null;
+  front_default: string;
+  front_female: null;
+  front_shiny: string;
+  front_shiny_female: null;
 }
 
 interface PokemonStatsData {
@@ -112,13 +110,13 @@ interface PokemonStatsData {
   stat: {
     name: string;
     url: string;
-  }
+  };
 }
 
 interface PokemonTypesData {
   slot: number;
   type: {
     name: string;
-    url: string
-  }
+    url: string;
+  };
 }
