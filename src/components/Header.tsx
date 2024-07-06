@@ -3,7 +3,7 @@ import { CiSearch } from 'react-icons/ci';
 
 interface HeaderProps {
   value: string;
-  handleSearch(): Promise<void>;
+  handleSearch(query: string): Promise<void>;
 }
 
 export default class Header extends React.Component<HeaderProps, { value: string }> {
@@ -37,7 +37,8 @@ export default class Header extends React.Component<HeaderProps, { value: string
     event.preventDefault();
     const { handleSearch } = this.props;
     this.handleSearchButton();
-    handleSearch();
+    const { value } = this.state;
+    handleSearch(value);
   }
 
   render() {
