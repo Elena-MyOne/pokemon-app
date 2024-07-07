@@ -8,9 +8,8 @@ import ErrorBoundary from './components/ErrorBoundary';
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
-  const [error, setError] = useState<Error | null | unknown>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [itemsPerPage, setItemsPerPage] = useState<number>(6);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(8);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isClichedErrorButton, setIsClichedErrorButton] = useState<boolean>(false);
 
@@ -36,7 +35,7 @@ export default function App() {
       const data: PokemonsData = await response.json();
       return data.results;
     } catch (error) {
-      setError(error);
+      console.error(error);
       setIsLoading(false);
     }
   }, [itemsPerPage]);
@@ -47,7 +46,7 @@ export default function App() {
       const pokemonData = await response.json();
       return pokemonData;
     } catch (error) {
-      setError(error);
+      console.error(error);
     }
   }, []);
 
@@ -59,13 +58,12 @@ export default function App() {
         const pokemons = await Promise.all(pokemonsPromises);
         setPokemons(pokemons);
         setIsLoading(false);
-        setError(null);
         setErrorMessage('');
       }
     } catch (error) {
       setPokemons([]);
       setIsLoading(false);
-      setError(error);
+      console.error(error);
       setErrorMessage('Data cannot be downloaded');
     }
   }, [getPokemonsList, getPokemonsData]);
@@ -82,7 +80,7 @@ export default function App() {
 
       if (!searchQuery) {
         setErrorMessage('');
-        setError(null);
+
         if (!pokemons.length || !searchQuery) {
           getPokemons();
           return;
@@ -97,13 +95,12 @@ export default function App() {
         const data = await response.json();
         setPokemons([data]);
         setIsLoading(false);
-        setError(null);
         setErrorMessage('');
       } catch (error) {
         console.log(`Pokemon ${searchQuery} not found:`, error);
         setIsLoading(false);
         setPokemons([]);
-        setError(error);
+        console.error(error);
         setErrorMessage(
           `Pokemon "${searchQuery}" is not found, Please try searching for another one.`
         );
@@ -123,22 +120,22 @@ export default function App() {
         <Header value="" handleSearch={handleSearch} />
         <main className="m-auto px-0 py-4 md:container">
           {errorMessage ? (
-            <div className="text-error text-center pt-4">
+            <div className="text-red-500 text-center pt-4">
               <span>{errorMessage}</span>
             </div>
           ) : (
             <>
               <div className="flex justify-end my-4">
-                <button className="btn btn-primary" onClick={throwError}>
+                <button className="bg-yellow-300 hover:bg-yellow-400 duration-300 px-4 py-2" onClick={throwError}>
                   ErrorBoundary
                 </button>
               </div>
               {isLoading && (
                 <div className="text-center">
-                  <span className="loading loading-spinner text-primary"></span>
+                  <span className="text-yellow-400">Loading ...</span>
                 </div>
               )}
-              <div className="grid grid-cols-3 grid-rows-2 gap-4 py-4">
+              <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
                 {pokemons.map((pokemon) => (
                   <PokemonCard key={pokemon.id} pokemon={pokemon} />
                 ))}
