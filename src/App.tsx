@@ -117,7 +117,7 @@ export default function App() {
   return (
     <>
       <ErrorBoundary isClichedErrorButton={isClichedErrorButton}>
-        <Header value="" handleSearch={handleSearch} />
+        <Header handleSearch={handleSearch} />
         <main className="m-auto px-0 py-4 md:container">
           {errorMessage ? (
             <div className="text-red-500 text-center pt-4">
@@ -126,7 +126,10 @@ export default function App() {
           ) : (
             <>
               <div className="flex justify-end my-4">
-                <button className="bg-yellow-300 hover:bg-yellow-400 duration-300 px-4 py-2" onClick={throwError}>
+                <button
+                  className="bg-yellow-300 hover:bg-yellow-400 duration-300 px-4 py-2"
+                  onClick={throwError}
+                >
                   ErrorBoundary
                 </button>
               </div>
@@ -135,11 +138,13 @@ export default function App() {
                   <span className="text-yellow-400">Loading ...</span>
                 </div>
               )}
-              <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
-                {pokemons.map((pokemon) => (
-                  <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                ))}
-              </div>
+              {!isLoading && (
+                <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
+                  {pokemons.map((pokemon) => (
+                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                  ))}
+                </div>
+              )}
             </>
           )}
         </main>
