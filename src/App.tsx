@@ -76,36 +76,41 @@ export default function App() {
     return saverdSearchQuery;
   }
 
-  const handleSearch = useCallback(async (query: string) => {
-    const searchQuery = query || getSearchQuery();
+  const handleSearch = useCallback(
+    async (query: string) => {
+      const searchQuery = query || getSearchQuery();
 
-    if (!searchQuery) {
-      setErrorMessage('');
-      setError(null);
-      if (!pokemons.length || !searchQuery) {
-        getPokemons();
+      if (!searchQuery) {
+        setErrorMessage('');
+        setError(null);
+        if (!pokemons.length || !searchQuery) {
+          getPokemons();
+          return;
+        }
         return;
       }
-      return;
-    }
 
-    setIsLoading(true);
+      setIsLoading(true);
 
-    try {
-      const response = await fetch(`${URLS.POKEMONS}/${searchQuery.toLowerCase()}`);
-      const data = await response.json();
-      setPokemons([data]);
-      setIsLoading(false);
-      setError(null);
-      setErrorMessage('');
-    } catch (error) {
-      console.log(`Pokemon ${searchQuery} not found:`, error);
-      setIsLoading(false);
-      setPokemons([]);
-      setError(error);
-      setErrorMessage(`Pokemon "${searchQuery}" is not found, Please try searching for another one.`);
-    }
-  }, [pokemons.length, getPokemons]);
+      try {
+        const response = await fetch(`${URLS.POKEMONS}/${searchQuery.toLowerCase()}`);
+        const data = await response.json();
+        setPokemons([data]);
+        setIsLoading(false);
+        setError(null);
+        setErrorMessage('');
+      } catch (error) {
+        console.log(`Pokemon ${searchQuery} not found:`, error);
+        setIsLoading(false);
+        setPokemons([]);
+        setError(error);
+        setErrorMessage(
+          `Pokemon "${searchQuery}" is not found, Please try searching for another one.`
+        );
+      }
+    },
+    [pokemons.length, getPokemons]
+  );
 
   function throwError() {
     setIsClichedErrorButton(true);
@@ -143,5 +148,5 @@ export default function App() {
         </main>
       </ErrorBoundary>
     </>
-  )
+  );
 }
