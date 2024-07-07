@@ -30,7 +30,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, P
 
     if (hasError || isClichedErrorButton) {
       return (
-        <div className="flex justify-center items-center p-4 bg-error">
+        <div className="flex justify-center items-center p-4 bg-red-500">
           <span className="text-xl">
             <BiError />
           </span>

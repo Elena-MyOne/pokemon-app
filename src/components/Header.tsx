@@ -44,24 +44,24 @@ export default class Header extends React.Component<HeaderProps, { value: string
     const { value } = this.state;
 
     return (
-      <header className="navbar m-auto flex-col gap-4 border-b border-gray-200 p-0 py-2 md:container lg:flex-row justify-between">
-        <div className="font-bold text-primary text-xl">Pokémon</div>
+      <header className="flex m-auto gap-4 border-b border-gray-200 p-0 py-4 md:container justify-between items-center">
+        <div className="font-bold text-primary text-xl text-yellow-400">Pokémon</div>
         <form onSubmit={this.handleSearchForm}>
-          <label className="input input-bordered flex items-center gap-2">
+          <div className="flex items-center">
             <input
               type="text"
-              className="grow"
+              className="grow border-gray-300 border-[1px] p-2"
               placeholder="Search..."
               value={value}
               onChange={this.handleChange}
             />
             <button
-              className="text-2xl text-gray-400 cursor-pointer hover:text-black duration-300"
+              className="text-2xl cursor-pointer text-black duration-300 border-[1px] border border-transparent bg-yellow-300 hover:bg-yellow-400 duration-300 p-2"
               onClick={this.handleSearchButton}
             >
               <CiSearch />
             </button>
-          </label>
+          </div>
         </form>
       </header>
     );

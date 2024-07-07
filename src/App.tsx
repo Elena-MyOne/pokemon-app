@@ -23,7 +23,7 @@ export default class App extends React.Component<object, AppProps> {
       pokemons: [],
       error: null,
       errorMessage: '',
-      itemsPerPage: 6,
+      itemsPerPage: 8,
       searchQuery: '',
       isClichedErrorButton: false,
     };
@@ -161,13 +161,16 @@ export default class App extends React.Component<object, AppProps> {
           <Header value="" handleSearch={this.handleSearch} />
           <main className="m-auto px-0 py-4 md:container">
             {errorMessage ? (
-              <div className="text-error text-center pt-4">
+              <div className="text-red-500 text-center pt-4">
                 <span>{errorMessage}</span>
               </div>
             ) : (
               <>
                 <div className="flex justify-end my-4">
-                  <button className="btn btn-primary" onClick={this.throwError}>
+                  <button
+                    className="bg-yellow-300 hover:bg-yellow-400 py-2 px-4 duration-300"
+                    onClick={this.throwError}
+                  >
                     ErrorBoundary
                   </button>
                 </div>
@@ -176,7 +179,7 @@ export default class App extends React.Component<object, AppProps> {
                     <span className="loading loading-spinner text-primary"></span>
                   </div>
                 )}
-                <div className="grid grid-cols-3 grid-rows-2 gap-4 py-4">
+                <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
                   {pokemons.map((pokemon) => (
                     <PokemonCard key={pokemon.id} pokemon={pokemon} />
                   ))}
