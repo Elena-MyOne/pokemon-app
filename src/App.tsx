@@ -176,7 +176,7 @@ export default class App extends React.Component<object, AppProps> {
                 </div>
                 {isLoading && (
                   <div className="text-center">
-                    <span className="loading loading-spinner text-primary"></span>
+                    <span className="text-primary">Loading ...</span>
                   </div>
                 )}
                 <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
