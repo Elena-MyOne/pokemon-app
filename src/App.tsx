@@ -4,41 +4,29 @@ import { PokemonData, PokemonsData } from './models/interfaces';
 import { URLS } from './models/enums';
 import PokemonCard from './components/PokemonCard';
 import ErrorBoundary from './components/ErrorBoundary';
+import { ITEMS_PER_PAGE } from './constants/api';
+import Pagination from './components/Pagination';
+import Loader from './components/Loader';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [itemsPerPage, setItemsPerPage] = useState<number>(8);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isClichedErrorButton, setIsClichedErrorButton] = useState<boolean>(false);
-
-  useEffect(() => {
-    const savedSearchQuery = localStorage.getItem('PockemonCo');
-    if (savedSearchQuery) {
-      handleSearch(savedSearchQuery);
-    } else {
-      getPokemons();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (searchQuery) {
-      handleSearch(searchQuery);
-    }
-  }, [searchQuery]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const getPokemonsList = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${URLS.POKEMONS}?limit=${itemsPerPage}`);
+      const response = await fetch(`${URLS.POKEMONS}?limit=${ITEMS_PER_PAGE}`);
       const data: PokemonsData = await response.json();
       return data.results;
     } catch (error) {
       console.error(error);
       setIsLoading(false);
     }
-  }, [itemsPerPage]);
+  }, []);
 
   const getPokemonsData = useCallback(async (url: string) => {
     try {
@@ -69,9 +57,9 @@ export default function App() {
   }, [getPokemonsList, getPokemonsData]);
 
   function getSearchQuery() {
-    const saverdSearchQuery = localStorage.getItem('PockemonCo') || '';
-    setSearchQuery(saverdSearchQuery);
-    return saverdSearchQuery;
+    const savedSearchQuery = localStorage.getItem('PockemonCo') || '';
+    setSearchQuery(savedSearchQuery);
+    return savedSearchQuery;
   }
 
   const handleSearch = useCallback(
@@ -114,6 +102,21 @@ export default function App() {
     console.error('Error: The Error boundary button was triggered');
   }
 
+  useEffect(() => {
+    if (searchQuery) {
+      handleSearch(searchQuery);
+    }
+  }, [searchQuery, handleSearch]);
+
+  useEffect(() => {
+    const savedSearchQuery = localStorage.getItem('PockemonCo');
+    if (savedSearchQuery) {
+      handleSearch(savedSearchQuery);
+    } else {
+      getPokemons();
+    }
+  }, [getPokemons, handleSearch]);
+
   return (
     <>
       <ErrorBoundary isClichedErrorButton={isClichedErrorButton}>
@@ -133,17 +136,18 @@ export default function App() {
                   ErrorBoundary
                 </button>
               </div>
-              {isLoading && (
-                <div className="text-center">
-                  <span className="text-yellow-400">Loading ...</span>
-                </div>
-              )}
+              {isLoading && <Loader />}
               {!isLoading && (
-                <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
-                  {pokemons.map((pokemon) => (
-                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                  ))}
-                </div>
+                <>
+                  <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
+                    {pokemons.map((pokemon) => (
+                      <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                    ))}
+                  </div>
+                  {pokemons.length > 0 && (
+                    <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                  )}
+                </>
               )}
             </>
           )}

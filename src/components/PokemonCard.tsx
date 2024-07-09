@@ -5,7 +5,6 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard({ pokemon }: PokemonCardProps) {
-
   return (
     <div className="bg-gray-50 p-4 w-56 hover:shadow-lg cursor-pointer duration-300 shadow-md">
       {pokemon.sprites.front_default ? (
@@ -24,5 +23,4 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
       </div>
     </div>
   );
-
 }
