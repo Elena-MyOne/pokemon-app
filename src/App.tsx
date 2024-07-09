@@ -3,7 +3,6 @@ import Header from './components/Header';
 import { PokemonData, PokemonsData } from './models/interfaces';
 import { URLS } from './models/enums';
 import PokemonCard from './components/PokemonCard';
-import ErrorBoundary from './components/ErrorBoundary';
 import { ITEMS_PER_PAGE } from './constants/api';
 import Pagination from './components/Pagination';
 import Loader from './components/Loader';
@@ -13,7 +12,6 @@ export default function App() {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [isClichedErrorButton, setIsClichedErrorButton] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const getPokemonsList = useCallback(async () => {
@@ -97,11 +95,6 @@ export default function App() {
     [pokemons.length, getPokemons]
   );
 
-  function throwError() {
-    setIsClichedErrorButton(true);
-    console.error('Error: The Error boundary button was triggered');
-  }
-
   useEffect(() => {
     if (searchQuery) {
       handleSearch(searchQuery);
@@ -119,40 +112,30 @@ export default function App() {
 
   return (
     <>
-      <ErrorBoundary isClichedErrorButton={isClichedErrorButton}>
-        <Header handleSearch={handleSearch} />
-        <main className="m-auto px-0 py-4 md:container">
-          {errorMessage ? (
-            <div className="text-red-500 text-center pt-4">
-              <span>{errorMessage}</span>
-            </div>
-          ) : (
-            <>
-              <div className="flex justify-end my-4">
-                <button
-                  className="bg-yellow-300 hover:bg-yellow-400 duration-300 px-4 py-2"
-                  onClick={throwError}
-                >
-                  ErrorBoundary
-                </button>
-              </div>
-              {isLoading && <Loader />}
-              {!isLoading && (
-                <>
-                  <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
-                    {pokemons.map((pokemon) => (
-                      <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                    ))}
-                  </div>
-                  {pokemons.length > 0 && (
-                    <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
-                  )}
-                </>
-              )}
-            </>
-          )}
-        </main>
-      </ErrorBoundary>
+      <Header handleSearch={handleSearch} />
+      <main className="m-auto px-0 py-6 md:container">
+        {errorMessage ? (
+          <div className="text-red-500 text-center pt-4">
+            <span>{errorMessage}</span>
+          </div>
+        ) : (
+          <>
+            {isLoading && <Loader />}
+            {!isLoading && (
+              <>
+                <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
+                  {pokemons.map((pokemon) => (
+                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                  ))}
+                </div>
+                {pokemons.length > 0 && (
+                  <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                )}
+              </>
+            )}
+          </>
+        )}
+      </main>
     </>
   );
 }

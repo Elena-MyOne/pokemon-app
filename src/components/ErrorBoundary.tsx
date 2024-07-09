@@ -3,7 +3,6 @@ import { BiError } from 'react-icons/bi';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
-  isClichedErrorButton: boolean;
 }
 
 interface Props {
@@ -26,9 +25,8 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, P
 
   render() {
     const { hasError } = this.state;
-    const { isClichedErrorButton } = this.props;
 
-    if (hasError || isClichedErrorButton) {
+    if (hasError) {
       return (
         <div className="flex justify-center items-center p-4 bg-red-500">
           <span className="text-xl">

@@ -1,7 +1,7 @@
 export default function Loader() {
   return (
     <div className="text-center">
-      <span className="text-yellow-400">Loading ...</span>
+      <span className="text-yellow-500">Loading ...</span>
     </div>
   );
 }
