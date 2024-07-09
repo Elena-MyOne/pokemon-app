@@ -1,13 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "integralcf";
   src: url("../assets/fonts/integralcf-extrabold.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 html,
 body {
@@ -16,7 +16,7 @@ body {
   flex-direction: column;
 }
 
-body {
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

@@ -3,11 +3,10 @@
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
-if [ "$branch" = "main" ]; then
+if [ "$branch" = "master" ]; then
   echo "You can't commit directly to main branch. Please create a branch for this module and use PR"
   exit 1
 fi
 
-# npm test
 npm run format:fix
 npm run lint
