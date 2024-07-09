@@ -2,10 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import Header from './components/Header';
 import { PokemonData, PokemonsData } from './models/interfaces';
 import { URLS } from './models/enums';
-import PokemonCard from './components/PokemonCard';
 import { ITEMS_PER_PAGE } from './constants/api';
-import Pagination from './components/Pagination';
-import Loader from './components/Loader';
+import MainPage from './pages/MainPage';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -114,27 +112,13 @@ export default function App() {
     <>
       <Header handleSearch={handleSearch} />
       <main className="m-auto px-0 py-6 md:container">
-        {errorMessage ? (
-          <div className="text-red-500 text-center pt-4">
-            <span>{errorMessage}</span>
-          </div>
-        ) : (
-          <>
-            {isLoading && <Loader />}
-            {!isLoading && (
-              <>
-                <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
-                  {pokemons.map((pokemon) => (
-                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                  ))}
-                </div>
-                {pokemons.length > 0 && (
-                  <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
-                )}
-              </>
-            )}
-          </>
-        )}
+        <MainPage
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+          pokemons={pokemons}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </main>
     </>
   );
