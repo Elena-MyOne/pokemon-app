@@ -108,17 +108,19 @@ export default function App() {
     }
   }, [getPokemons, handleSearch]);
 
+  const getMainPageProps = () => ({
+    errorMessage,
+    isLoading,
+    pokemons,
+    currentPage,
+    setCurrentPage,
+  });
+
   return (
     <>
       <Header handleSearch={handleSearch} />
       <main className="m-auto px-0 py-6 md:container">
-        <MainPage
-          errorMessage={errorMessage}
-          isLoading={isLoading}
-          pokemons={pokemons}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+        <MainPage {...getMainPageProps()} />
       </main>
     </>
   );
