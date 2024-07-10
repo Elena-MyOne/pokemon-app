@@ -13,19 +13,22 @@ export default function App() {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPokemons, setTotalPokemons] = useState<number | null>(null);
   const [savedValue] = useLocalStorage('PockemonCo');
 
   const getPokemonsList = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${URLS.POKEMONS}?limit=${ITEMS_PER_PAGE}`);
+      const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+      const response = await fetch(`${URLS.POKEMONS}?limit=${ITEMS_PER_PAGE}&offset=${offset}`);
       const data: PokemonsData = await response.json();
+      setTotalPokemons(data.count);
       return data.results;
     } catch (error) {
       console.error(error);
       setIsLoading(false);
     }
-  }, []);
+  }, [currentPage]);
 
   const getPokemonsData = useCallback(async (url: string) => {
     try {
@@ -58,7 +61,6 @@ export default function App() {
   const handleSearch = useCallback(
     async (query: string) => {
       const searchQuery = query || savedValue;
-      console.log(searchQuery);
 
       if (!searchQuery) {
         setErrorMessage('');
@@ -112,6 +114,7 @@ export default function App() {
     pokemons,
     currentPage,
     setCurrentPage,
+    totalPokemons,
   });
 
   return (

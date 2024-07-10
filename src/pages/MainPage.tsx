@@ -9,6 +9,7 @@ interface MainPageProps {
   pokemons: PokemonData[];
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  totalPokemons: number | null;
 }
 
 export default function MainPage({
@@ -17,6 +18,7 @@ export default function MainPage({
   pokemons,
   currentPage,
   setCurrentPage,
+  totalPokemons,
 }: MainPageProps) {
   return (
     <>
@@ -35,7 +37,11 @@ export default function MainPage({
                 ))}
               </div>
               {pokemons.length > 0 && (
-                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <Pagination
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalPokemons={totalPokemons}
+                />
               )}
             </>
           )}
