@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import Header from './components/Header';
 import { PokemonData, PokemonsData } from './models/interfaces';
-import { URLS } from './models/enums';
+import { ROUTE_PATHS, URLS } from './models/enums';
 import { ITEMS_PER_PAGE } from './constants/api';
 import MainPage from './pages/MainPage';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -117,11 +118,10 @@ export default function App() {
   });
 
   return (
-    <>
-      <Header handleSearch={handleSearch} />
-      <main className="m-auto px-0 py-6 md:container">
-        <MainPage {...getMainPageProps()} />
-      </main>
-    </>
+    <Routes>
+      <Route path={ROUTE_PATHS.MAIN} element={<Layout handleSearch={handleSearch} />}>
+        <Route index element={<MainPage {...getMainPageProps()} />} />
+      </Route>
+    </Routes>
   );
 }
