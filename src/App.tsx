@@ -5,6 +5,7 @@ import { ITEMS_PER_PAGE } from './constants/api';
 import MainPage from './pages/MainPage';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
+import NotFoundPage from './pages/NotFound';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -121,6 +122,7 @@ export default function App() {
     <Routes>
       <Route path={ROUTE_PATHS.MAIN} element={<Layout handleSearch={handleSearch} />}>
         <Route index element={<MainPage {...getMainPageProps()} />} />
+        <Route path={ROUTE_PATHS.NOTFOUND} element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
