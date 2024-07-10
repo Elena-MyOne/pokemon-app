@@ -6,13 +6,14 @@ import MainPage from './pages/MainPage';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import NotFoundPage from './pages/NotFound';
+import useLocalStorage from './hooks/useLocalStorage';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [savedValue] = useLocalStorage('PockemonCo');
 
   const getPokemonsList = useCallback(async () => {
     setIsLoading(true);
@@ -54,15 +55,9 @@ export default function App() {
     }
   }, [getPokemonsList, getPokemonsData]);
 
-  function getSearchQuery() {
-    const savedSearchQuery = localStorage.getItem('PockemonCo') || '';
-    setSearchQuery(savedSearchQuery);
-    return savedSearchQuery;
-  }
-
   const handleSearch = useCallback(
     async (query: string) => {
-      const searchQuery = query || getSearchQuery();
+      const searchQuery = query || savedValue;
       console.log(searchQuery);
 
       if (!searchQuery) {
@@ -93,14 +88,14 @@ export default function App() {
         );
       }
     },
-    [pokemons.length, getPokemons]
+    [pokemons.length, getPokemons, savedValue]
   );
 
   useEffect(() => {
-    if (searchQuery) {
-      handleSearch(searchQuery);
+    if (savedValue) {
+      handleSearch(savedValue);
     }
-  }, [searchQuery, handleSearch]);
+  }, [savedValue, handleSearch]);
 
   useEffect(() => {
     const savedSearchQuery = localStorage.getItem('PockemonCo');
