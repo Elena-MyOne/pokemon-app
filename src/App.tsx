@@ -63,6 +63,7 @@ export default function App() {
   const handleSearch = useCallback(
     async (query: string) => {
       const searchQuery = query || getSearchQuery();
+      console.log(searchQuery);
 
       if (!searchQuery) {
         setErrorMessage('');

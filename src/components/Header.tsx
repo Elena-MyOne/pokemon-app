@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { CiSearch } from 'react-icons/ci';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 interface HeaderProps {
   handleSearch(query: string): Promise<void>;
 }
 
 export default function Header({ handleSearch }: HeaderProps) {
-  const [searchValue, setSearchValue] = useState('');
+  const [savedValue, setSavedValue] = useLocalStorage('PockemonCo');
 
   useEffect(() => {
-    const savedValue = localStorage.getItem('PockemonCo') || '';
-    setSearchValue(savedValue);
-  }, []);
+    setSavedValue(savedValue);
+  }, [savedValue, setSavedValue]);
 
   function handleChange(event: React.FormEvent<HTMLInputElement>): void {
     const target = event.currentTarget.value;
-    setSearchValue(target);
+    setSavedValue(target);
   }
 
   function handleSearchButton(): void {
-    localStorage.setItem('PockemonCo', searchValue);
+    setSavedValue(savedValue);
   }
 
   function handleSearchForm(event: React.FormEvent) {
     event.preventDefault();
     handleSearchButton();
-    handleSearch(searchValue);
+    handleSearch(savedValue);
   }
 
   return (
@@ -37,7 +37,7 @@ export default function Header({ handleSearch }: HeaderProps) {
             type="text"
             className="grow border-gray-300 border-[1px] p-2"
             placeholder="Search for pokemon..."
-            value={searchValue}
+            value={savedValue}
             onChange={handleChange}
           />
           <button
