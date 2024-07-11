@@ -3,10 +3,11 @@ import { PokemonData, PokemonsData } from './models/interfaces';
 import { ROUTE_PATHS, URLS } from './models/enums';
 import { ITEMS_PER_PAGE } from './constants/api';
 import MainPage from './pages/MainPage';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
 import Layout from './components/Layout';
 import NotFoundPage from './pages/NotFound';
 import useLocalStorage from './hooks/useLocalStorage';
+import DetailsPage from './pages/DetailsPage';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -14,7 +15,14 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPokemons, setTotalPokemons] = useState<number | null>(null);
+
   const [savedValue] = useLocalStorage('PockemonCo');
+
+  const [, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setSearchParams({ page: `${currentPage}` });
+  }, [currentPage, setSearchParams]);
 
   const getPokemonsList = useCallback(async () => {
     setIsLoading(true);
@@ -120,7 +128,9 @@ export default function App() {
   return (
     <Routes>
       <Route path={ROUTE_PATHS.MAIN} element={<Layout handleSearch={handleSearch} />}>
-        <Route index element={<MainPage {...getMainPageProps()} />} />
+        <Route path={ROUTE_PATHS.MAIN} element={<MainPage {...getMainPageProps()} />}>
+          <Route path={ROUTE_PATHS.DETAILS} element={<DetailsPage />} />
+        </Route>
         <Route path={ROUTE_PATHS.NOTFOUND} element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Pagination from '../components/Pagination';
 import PokemonCard from '../components/PokemonCard';
@@ -31,11 +32,17 @@ export default function MainPage({
           {isLoading && <Loader />}
           {!isLoading && (
             <>
-              <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4">
-                {pokemons.map((pokemon) => (
-                  <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                ))}
+              <div className="flex items-center gap-6">
+                <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4 grow">
+                  {pokemons.map((pokemon) => (
+                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                  ))}
+                </div>
+                <div className="">
+                  <Outlet />
+                </div>
               </div>
+
               {pokemons.length > 0 && (
                 <Pagination
                   currentPage={currentPage}
