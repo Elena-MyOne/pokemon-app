@@ -44,7 +44,11 @@ export default function DetailsPage() {
             <div className="flex flex-col gap-4 bg-gray-50 p-4 shadow-md min-w-[300px]">
               {pokemon.sprites.front_default ? (
                 <figure className="h-34 flex items-center justify-center">
-                  <img src={pokemon.sprites.front_default} alt={`pokemon ${pokemon.name} image`} />
+                  <img
+                    src={pokemon.sprites.front_default}
+                    alt={`pokemon ${pokemon.name} image`}
+                    data-testid="details-image"
+                  />
                 </figure>
               ) : (
                 <div className="w-full h-36 bg-secondary"></div>
