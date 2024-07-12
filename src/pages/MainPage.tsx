@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Pagination from '../components/Pagination';
-import PokemonCard from '../components/PokemonCard';
 import { PokemonData } from '../models/interfaces';
+import PokemonCardList from '../components/PokemonCardList';
 
-interface MainPageProps {
+export interface MainPageProps {
   errorMessage: string;
   isLoading: boolean;
   pokemons: PokemonData[];
@@ -33,11 +33,7 @@ export default function MainPage({
           {!isLoading && (
             <>
               <div className="flex items-center gap-6">
-                <div className="grid grid-cols-4 grid-rows-2 gap-6 py-4 grow">
-                  {pokemons.map((pokemon) => (
-                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                  ))}
-                </div>
+                <PokemonCardList pokemons={pokemons} />
                 <div>
                   <Outlet />
                 </div>

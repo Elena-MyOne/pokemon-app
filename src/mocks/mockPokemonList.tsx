@@ -1,6 +1,7 @@
+import { PokemonData } from '../models/interfaces';
 import { mockPokemon } from './mockPokemon';
 
-const mockPokemon2 = {
+const mockPokemon2: PokemonData = {
   abilities: [
     {
       ability: {
