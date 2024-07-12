@@ -10,6 +10,7 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
     <Link
       to={`/details/${pokemon.id}`}
       className="bg-gray-50 p-4 w-56 hover:shadow-lg cursor-pointer duration-300 shadow-md"
+      data-testid="card"
     >
       {pokemon.sprites.front_default ? (
         <figure className="h-36 flex items-center justify-center">
