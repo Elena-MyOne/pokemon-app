@@ -27,7 +27,7 @@ export interface PokemonData {
   moves: PokemonMovesData[];
   name: string;
   order: number;
-  past_abilities: [];
+  past_abilities: [] | never[];
   past_types: [];
   species: {
     name: string;

@@ -38,7 +38,7 @@ export default function MainPage({
                     <PokemonCard key={pokemon.id} pokemon={pokemon} />
                   ))}
                 </div>
-                <div className="">
+                <div>
                   <Outlet />
                 </div>
               </div>
