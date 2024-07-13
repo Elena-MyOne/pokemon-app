@@ -31,7 +31,7 @@ export default function Header({ handleSearch }: HeaderProps) {
   return (
     <header className="flex m-auto gap-4 border-b border-gray-200 p-0 py-4 md:container justify-between items-center">
       <div className="font-bold text-yellow-400 text-xl">Pokémon</div>
-      <form onSubmit={handleSearchForm}>
+      <form onSubmit={handleSearchForm} data-testid="search-form">
         <div className="flex items-center">
           <input
             type="text"
